@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace EpicBattle_not_
 {
@@ -6,19 +7,21 @@ namespace EpicBattle_not_
     {
         static void Main(string[] args)
         {
-            string[] heroes = { "Bald dude from Brazzers", "69 letniy bomz(lvl 69420 Class = wiseman)", "Shrek", "Dungeon Master", "Oleg"};
-            string[] villians = {"Buhoy gopnik(lvl 130 Class = thief)", "Lenin(lvl 9999)", "older brother after u took his crisps", "babayka", "C++", "chel s 10000 hr+ v Dota 2", "LGBT blm feminism woman", "Lil Nas X"};
-            string[] weapon = { "Bow", "Sword", "Katana", "Cookie", "Pistol", "Bazooka", "Tank", "Knife", "Pen", "Default Dance" };
+
+            string rootPath = @"C:\Users\opilane\Samples\";
+            string[] heroes = GetDataFromFile(rootPath + "heroes.txt");
+            string[] villains = GetDataFromFile(rootPath + "villains.txt");
+            string[] weapons = GetDataFromFile(rootPath + "weapons.txt");
 
             string randomHero = GetRandomCharacter(heroes);
-            string randomVillian = GetRandomCharacter(villians);
-            string randomHeroWeapon = GetWeapon(weapon);
-            string randomVillianWeapon = GetWeapon(weapon);
+            string randomVillain = GetRandomCharacter(villains);
+            string randomHeroWeapon = GetWeapon(weapons);
+            string randomVillainWeapon = GetWeapon(weapons);
 
             Console.WriteLine($"UR HERO IS {randomHero}");
             Console.WriteLine($"with {randomHeroWeapon}");
-            Console.WriteLine($"UR VILLIAN IS {randomVillian}");
-            Console.WriteLine($"with {randomVillianWeapon}");
+            Console.WriteLine($"UR VILLIAN IS {randomVillain}");
+            Console.WriteLine($"with {randomVillainWeapon}");
         }
 
         public static string GetRandomCharacter(string[] someArray)
@@ -36,5 +39,12 @@ namespace EpicBattle_not_
             Random rnd = new Random();
             return rnd.Next(0, someArray.Length);
         }
+
+        public static string[] GetDataFromFile(string filePath)
+        {
+            string[] dataFromFile = File.ReadAllLines(filePath);
+            return dataFromFile;
+        }
+
     }
 }
